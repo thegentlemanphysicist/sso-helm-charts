@@ -13,7 +13,6 @@ This directory contains a Kubernetes chart to deploy a BCGov Openshift `SysdigTe
 
 ```console
 $ helm repo add sso-charts https://bcgov.github.io/sso-helm-charts
-$ helm dependency update
 ```
 
 ### Install this chart repository
@@ -61,7 +60,5 @@ users:
   - name: sso.reader@gov.bc.ca
     role: ROLE_TEAM_READ
 ```
-
-ROLE_TEAM_READ (View-only User) - Read acc
 
 see [Available Roles](https://developer.gov.bc.ca/OpenShift-User-Guide-to-Creating-and-Using-a-Sysdig-Team-for-Monitoring#available-roles) for more available roles.
