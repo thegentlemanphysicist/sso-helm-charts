@@ -1,5 +1,32 @@
 apiVersion: v1
 entries:
+  patroni:
+  - apiVersion: v1
+    appVersion: 1.5-p5
+    created: "2022-05-09T18:12:21.958804243Z"
+    dependencies:
+    - condition: etcd.deployChart
+      name: etcd
+      repository: https://charts.helm.sh/incubator
+      version: 0.6.2
+    - condition: zookeeper.deployChart
+      name: zookeeper
+      repository: https://charts.helm.sh/incubator
+      version: 1.0.0
+    - condition: consul.deployChart
+      name: consul
+      repository: https://charts.helm.sh/stable
+      version: 3.6.1
+    description: 'Highly available elephant herd: HA PostgreSQL cluster.'
+    digest: cb60483b2f732265a6f068e9d925114e7f6e7f712ae18ad4aba5950e6ba8e662
+    home: https://github.com/zalando/patroni
+    name: patroni
+    sources:
+    - https://github.com/zalando/patroni
+    - https://github.com/zalando/spilo
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/patroni-0.17.8/patroni-0.17.8.tgz
+    version: 0.17.8
   sysdig:
   - apiVersion: v2
     appVersion: v1alpha1
@@ -11,4 +38,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-05T23:53:29.337888886Z"
+generated: "2022-05-09T18:12:21.959101247Z"
