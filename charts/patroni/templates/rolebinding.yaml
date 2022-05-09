@@ -1,14 +1,9 @@
 {{- if .Values.rbac.create }}
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ template "patroni.fullname" . }}
-  labels:
-    app: {{ template "patroni.fullname" . }}
-    chart: {{ template "patroni.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-    project: {{ template "patroni.project" . }}
+  labels: {{ include "patroni.labels" . | nindent 4 }}
 subjects:
   - kind: ServiceAccount
     name: {{ template "patroni.serviceAccountName" . }}

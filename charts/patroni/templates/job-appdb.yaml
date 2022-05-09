@@ -1,14 +1,8 @@
-{{- if .Values.appdb.create }}
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: {{ template "patroni.fullname" . }}
-  labels:
-    app: {{ template "patroni.fullname" . }}
-    chart: {{ template "patroni.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-    project: {{ template "patroni.project" . }}
+  labels: {{ include "patroni.labels" . | nindent 4 }}
   annotations:
     "helm.sh/hook": "post-install,post-upgrade"
     "helm.sh/hook-weight": "1"
@@ -16,9 +10,7 @@ metadata:
 spec:
   template:
     metadata:
-      labels:
-        app: {{ template "patroni.fullname" . }}
-        project: {{ template "patroni.project" . }}
+      labels: {{ include "patroni.labels" . | nindent 8 }}
     spec:
       containers:
         - name: initdb
@@ -27,20 +19,37 @@ spec:
           command: ["bash", "-c"]
           args:
             - |
-              echo starting;
               set -euo pipefail;
-              echo "select 'create database $PGDATABASE_NAME' where not exists (select from pg_database where datname = '$PGDATABASE_NAME')\gexec" | psql -d postgres
-              psql -d $PGDATABASE_NAME -qta --set on_error_stop=1 <<eof
+              echo starting
+
+              usernames=()
+              passwords=()
+              while IFS= read -r line; do
+                key=$(echo $line | cut -f 1 -d '=')
+                val=$(echo $line | cut -f 2 -d '=')
+                if [[ "$key" = u* ]]; then usernames+=("$val"); else passwords+=("$val"); fi
+              done <<<$(printenv | sort | sed -nr '/username-appuser|password-appuser/p')
+
+              index=0
+              for username in "${usernames[@]}"
+              do
+                password="${passwords[$index]}"
+
+                echo "select 'create database $username' where not exists (select from pg_database where datname = '$username')\gexec" | psql -d postgres
+                psql -d $username -qta --set on_error_stop=1 <<eof
                 do
                 \$do\$
                 begin
-                  if not exists (select from pg_catalog.pg_roles where rolname = '$APPUSER_USERNAME') then
-                      create role $APPUSER_USERNAME login password '$APPUSER_PASSWORD';
-                      grant all privileges on database $PGDATABASE_NAME to $APPUSER_USERNAME;
+                  if not exists (select from pg_catalog.pg_roles where rolname = '$username') then
+                    create role $username login password '$password';
+                    grant all privileges on database $username to $username;
                   end if;
                 end
                 \$do\$;
               eof
+
+                index=$((index + 1))
+              done
               echo "done"
           env:
             - name: PGHOST
@@ -57,18 +66,8 @@ spec:
                 secretKeyRef:
                   name: {{ template "patroni.fullname" . }}
                   key: password-superuser
-            - name: PGDATABASE_NAME
-              value: {{ .Values.appdb.dbname }}
-            - name: APPUSER_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "patroni.fullname" . }}
-                  key: username-appuser
-            - name: APPUSER_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "patroni.fullname" . }}
-                  key: password-appuser
+          envFrom:
+            - secretRef:
+                name: {{ template "patroni.fullname" . }}-appusers
       restartPolicy: Never
   backoffLimit: 1
-{{- end }}

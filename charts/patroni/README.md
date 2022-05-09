@@ -11,21 +11,20 @@ This directory contains a Kubernetes chart to deploy a [Patroni](https://github.
 
 This chart will do the following:
 
-- Implement a HA scalable PostgreSQL 10 cluster using a Kubernetes StatefulSet.
+- Implement a HA scalable PostgreSQL 14 cluster using a Kubernetes StatefulSet.
 
 ## Usages
 
 ### Add this chart repository
 
 ```console
-$ helm repo add sso-keycloak https://bcgov.github.io/sso-keycloak
-$ helm dependency update
+$ helm repo add sso-charts https://bcgov.github.io/sso-helm-charts
 ```
 
 ### Install this chart repository
 
 ```console
-$ helm install <release-name> sso-keycloak/patroni [--namespace <my-namespace>] [--version <x.y.z>] [--values ./custom-values.yaml]
+$ helm install <release-name> sso-charts/patroni [--namespace <my-namespace>] [--version <x.y.z>] [--values ./custom-values.yaml]
 
 # To create a randomly generated db credentials secret
 $ kubectl create secret generic <secret-name> -n <my-namespace> \
@@ -40,7 +39,7 @@ $ kubectl create secret generic <secret-name> -n <my-namespace> \
 ### Upgrade this chart repository
 
 ```console
-$ helm upgrade <release-name> sso-keycloak/patroni [--namespace <my-namespace>] [--version <x.y.z>] [--values ./custom-values.yaml]
+$ helm upgrade <release-name> sso-charts/patroni [--namespace <my-namespace>] [--version <x.y.z>] [--values ./custom-values.yaml]
 ```
 
 ### Uninstall this chart repository
@@ -61,13 +60,13 @@ The following table lists the configurable parameters of the patroni chart and t
 | `image.repository`               | The image to pull                                                                                                              | `registry.opensource.zalan.do/acid/spilo-10`        |
 | `image.tag`                      | The version of the image to pull                                                                                               | `1.5-p5`                                            |
 | `image.pullPolicy`               | The pull policy                                                                                                                | `IfNotPresent`                                      |
-| `auth.existingSecret`            | Using existing credentials secret                                                                                              | `nil`                                               |
-| `auth.superuser.username`        | Username of the superuser                                                                                                      | `postgres`                                          |
-| `auth.superuser.password`        | Password of the superuser                                                                                                      | `tea`                                               |
-| `auth.admin.username`            | Username of the admin                                                                                                          | `admin`                                             |
-| `auth.admin.password`            | Password of the admin                                                                                                          | `cola`                                              |
-| `auth.standby.username`          | Username of the standby                                                                                                        | `standby`                                           |
-| `auth.standby.password`          | Password of the standby                                                                                                        | `pinacolada`                                        |
+| `credentials.existingSecret`     | Using existing credentials secret                                                                                              | `nil`                                               |
+| `credentials.superuser.username` | Username of the superuser                                                                                                      | `postgres`                                          |
+| `credentials.superuser.password` | Password of the superuser                                                                                                      | `tea`                                               |
+| `credentials.admin.username`     | Username of the admin                                                                                                          | `admin`                                             |
+| `credentials.admin.password`     | Password of the admin                                                                                                          | `cola`                                              |
+| `credentials.standby.username`   | Username of the standby                                                                                                        | `standby`                                           |
+| `credentials.standby.password`   | Password of the standby                                                                                                        | `pinacolada`                                        |
 | `kubernetes.dcs.enable`          | Using Kubernetes as DCS                                                                                                        | `true`                                              |
 | `kubernetes.configmaps.enable`   | Using Kubernetes configmaps instead of endpoints                                                                               | `false`                                             |
 | `etcd.enable`                    | Using etcd as DCS                                                                                                              | `false`                                             |
