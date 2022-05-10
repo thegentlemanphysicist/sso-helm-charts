@@ -113,6 +113,12 @@ spec:
         {{- end }}
         - name: SCOPE
           value: {{ .Release.Name }}
+        {{- if .Values.standby.enabled }}
+        - name: STANDBY_HOST
+          value: {{ .Values.standby.host | quote }}
+        - name: STANDBY_PORT
+          value: {{ .Values.standby.port | quote }}
+        {{- end }}
         {{- if .Values.walE.enable }}
         - name: USE_WALE
           value: {{ .Values.walE.enable | quote }}

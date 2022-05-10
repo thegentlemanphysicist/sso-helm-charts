@@ -143,7 +143,17 @@ affinity: {}
 networkPolicy:
   enabled: true
 
-pdb:
+podDisruptionBudget:
   enabled: true
   minAvailable: 1
   maxUnavailable:
+
+standby:
+  enabled: false
+  host:
+  port: 5433
+
+transportServerClaim:
+  enabled: false
+  interval: 10
+  timeout: 10
