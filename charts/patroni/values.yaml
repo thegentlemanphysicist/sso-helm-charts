@@ -24,7 +24,7 @@ credentials:
     username: standby
     password:
 
-additionalCredentials:
+additionalCredentials: {}
 
 # Distribution Configuration stores
 # Please note that only one of the following stores should be enabled.
