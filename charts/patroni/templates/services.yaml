@@ -8,7 +8,7 @@ spec:
   ports:
   - name: postgresql
     port: 5432
-    targetPort: postgresql
+    targetPort: 5432
     protocol: TCP
   selector: {{ include "patroni.selectorLabels" . | nindent 4 }}
     {{ .Values.kubernetes.roleLabel }}: master
@@ -23,7 +23,7 @@ spec:
   ports:
   - name: postgresql
     port: 5432
-    targetPort: postgresql
+    targetPort: 5432
     protocol: TCP
   selector: {{ include "patroni.selectorLabels" . | nindent 4 }}
     {{ .Values.kubernetes.roleLabel }}: replica
