@@ -105,6 +105,17 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/patroni-0.17.8/patroni-0.17.8.tgz
     version: 0.17.8
+  sso-keycloak:
+  - apiVersion: v1
+    appVersion: 7.5-9-rc.2
+    created: "2022-05-11T22:26:01.434748711Z"
+    description: Open Source Identity and Access Management For Modern Applications
+      and Services
+    digest: 4bd3c8177230a5ffc51fda9da2ebb7aeb9bae87ff73e8dc5e5b969ce25b78e9c
+    name: sso-keycloak
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-0.1.8/sso-keycloak-0.1.8.tgz
+    version: 0.1.8
   sysdig:
   - apiVersion: v2
     appVersion: v1alpha1
@@ -116,4 +127,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-11T19:24:57.668843039Z"
+generated: "2022-05-11T22:26:01.434795111Z"
