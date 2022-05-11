@@ -8,7 +8,7 @@ metadata:
     description: "The JGroups ping port for clustering."
     service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
     {{- if .Values.tls.enabled }}
-    service.alpha.openshift.io/serving-cert-secret-name: {{ .Values.tls.jgroupsSecret }}
+    service.alpha.openshift.io/serving-cert-secret-name: {{ include "sso-keycloak.fullname" . }}-x509-jgroups
     {{- end }}
 spec:
   clusterIP: None

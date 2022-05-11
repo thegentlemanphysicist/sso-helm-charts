@@ -43,14 +43,13 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "sso-keycloak.labels" -}}
-project: {{ include "sso-keycloak.project" . }}
-release: {{ .Release.Name }}
 helm.sh/chart: {{ include "sso-keycloak.chart" . }}
 {{ include "sso-keycloak.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/part-of: {{ include "sso-keycloak.project" . }}
 {{- end }}
 
 {{/*

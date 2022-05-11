@@ -93,7 +93,7 @@ spec:
                   name: {{ .Values.postgres.credentials.secret }}
                   key: {{ .Values.postgres.credentials.usernameKey }}
               {{- else -}}
-              value: {{ .Values.postgres.credentials.adminUsername }}
+              value: {{ .Values.postgres.credentials.username }}
               {{- end }}
             - name: DB_PASSWORD
               {{- if and .Values.postgres.credentials.secret .Values.postgres.credentials.passwordKey }}
@@ -102,7 +102,7 @@ spec:
                   name: {{ .Values.postgres.credentials.secret }}
                   key: {{ .Values.postgres.credentials.passwordKey }}
               {{- else -}}
-              value: {{ .Values.postgres.credentials.adminPassword }}
+              value: {{ .Values.postgres.credentials.password }}
               {{- end }}
             - name: DB_DATABASE
               value: {{ .Values.postgres.database }}
@@ -168,11 +168,11 @@ spec:
         - name: sso-x509-https-volume
           secret:
             defaultMode: 420
-            secretName: {{ .Values.tls.httpsSecret }}
+            secretName: {{ include "sso-keycloak.fullname" . }}-https-jgroups
         - name: sso-x509-jgroups-volume
           secret:
             defaultMode: 420
-            secretName: {{ .Values.tls.jgroupsSecret }}
+            secretName: {{ include "sso-keycloak.fullname" . }}-x509-jgroups
         {{- end }}
         {{- if .Values.persistentLog.enabled }}
         - name: logs-volume

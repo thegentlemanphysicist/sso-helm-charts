@@ -48,7 +48,7 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `postgres.database`                  | name of database                               | `rhsso`                                                                                    |
 | `postgres.port`                      | exposed port of database                       | `5432`                                                                                     |
 | `postgres.credentials.secret`        | name of secret containing database credentials | `sso-pgsql`                                                                                |
-| `postgres.credentials.adminUsername` | name of admin database user                    | `postgres`                                                                                 |
+| `postgres.credentials.username` | name of admin database user                    | `postgres`                                                                                 |
 | `postgres.credentials.passwordKey`   | Secret key of admin password                   | `password-superuser`                                                                       |
 | `postgres.poolSize.min`              | Minimum pool size                              | `5`                                                                                        |
 | `postgres.poolSize.max`              | Maximum pool size                              | `20`                                                                                       |

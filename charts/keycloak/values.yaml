@@ -26,11 +26,11 @@ postgres:
   database: ssokeycloak
   port: 5432
   credentials:
-    secret:
-    usernameKey: username-superuser
-    passwordKey: password-superuser
-    adminUsername: postgres
-    adminPassword: postgres
+    secret: sso-keycloak-patroni
+    usernameKey: username-appuser1
+    passwordKey: password-appuser1
+    username: postgres
+    password: postgres
   poolSize:
     min: 5
     max: 20
@@ -41,8 +41,6 @@ additionalServerOptions: "-Dkeycloak.profile.feature.authorization=enabled -Djbo
 # see https://github.com/keycloak/keycloak-containers/blob/master/server/README.md#setting-up-tlsssl
 tls:
   enabled: false
-  httpsSecret: sso-x509-https-secret
-  jgroupsSecret: sso-x509-jgroups-secret
 
 persistentLog:
   enabled: true
@@ -62,3 +60,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+patroni:
+  install: true
+  replicaCount: 3
+
+  additionalCredentials:
+    ssokeycloak:
+
+  resources: {}
+  persistentVolume:
+    size: 10Gi
+
+  podDisruptionBudget:
+    enabled: true
