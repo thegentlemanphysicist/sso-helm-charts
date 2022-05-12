@@ -22,11 +22,11 @@ pingService:
   port: 8888
 
 postgres:
-  host:
+  host: sso-patroni
   database: ssokeycloak
   port: 5432
   credentials:
-    secret: sso-keycloak-patroni-appusers
+    secret: sso-patroni-appusers
     usernameKey: username-appuser1
     passwordKey: password-appuser1
     username: postgres
