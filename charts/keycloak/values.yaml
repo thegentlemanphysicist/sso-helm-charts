@@ -78,9 +78,6 @@ patroni:
   additionalCredentials:
     ssokeycloak: ""
 
-  env:
-    ALLOW_NOSSL: "true"
-
   persistentVolume:
     size: 10Gi
 
