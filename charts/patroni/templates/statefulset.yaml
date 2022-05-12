@@ -42,6 +42,10 @@ spec:
         env:
         - name: PGVERSION
           value: {{ .Values.postgresMajorVersion | quote }}
+        {{- if .Values.allowNoSSL }}
+        - name: ALLOW_NOSSL
+          value: "true"
+        {{- end }}
         - name: PGUSER_SUPERUSER
           valueFrom:
             secretKeyRef:

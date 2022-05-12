@@ -31,6 +31,9 @@ credentials:
 #   myapp: ""
 additionalCredentials: {}
 
+# set to allow clients to connect without SSL enabled.
+allowNoSSL: true
+
 # Distribution Configuration stores
 # Please note that only one of the following stores should be enabled.
 kubernetes:
@@ -63,10 +66,6 @@ consul:
 # Extra custom environment variables.
 # see https://github.com/zalando/spilo/blob/master/ENVIRONMENT.rst#environment-configuration-settings
 env: {}
-
-# In order to turn off default SSL mode, set ALLOW_NOSSL `true`
-# env:
-#   - ALLOW_NOSSL: 'true'
 
 walE:
   # Specifies whether Wal-E should be enabled
