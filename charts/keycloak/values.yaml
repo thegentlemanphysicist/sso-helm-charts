@@ -64,9 +64,22 @@ affinity: {}
 patroni:
   install: true
   replicaCount: 3
+  # RH-SSO v7.5-9 is not tested with PostgreSQL 14
+  image:
+    repository: registry.opensource.zalan.do/acid/spilo-13
+    tag: 2.1-p1
+
+  postgresMajorVersion: 13
+
+  project: sso-keycloak
+  nameOverride: sso-patroni
+  fullnameOverride: sso-patroni
 
   additionalCredentials:
     ssokeycloak: ""
+
+  env:
+    ALLOW_NOSSL: "true"
 
   persistentVolume:
     size: 10Gi
