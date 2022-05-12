@@ -110,12 +110,12 @@ spec:
             - name: SSO_ADMIN_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-admin-secret
+                  name: {{ include "sso-keycloak.fullname" . }}-admin
                   key: username
             - name: SSO_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-admin-secret
+                  name: {{ include "sso-keycloak.fullname" . }}-admin
                   key: password
             # DB POOL SIZES
             - name: DB_MIN_POOL_SIZE
@@ -168,7 +168,7 @@ spec:
         - name: sso-x509-https-volume
           secret:
             defaultMode: 420
-            secretName: {{ include "sso-keycloak.fullname" . }}-https-jgroups
+            secretName: {{ include "sso-keycloak.fullname" . }}-x509-https
         - name: sso-x509-jgroups-volume
           secret:
             defaultMode: 420
