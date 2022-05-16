@@ -85,4 +85,4 @@ patroni:
     enabled: true
 
 tags:
-  patroni-enabled: true
+  patroni-enabled: false
