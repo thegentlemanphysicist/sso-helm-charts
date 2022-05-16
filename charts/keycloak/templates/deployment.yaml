@@ -133,7 +133,10 @@ spec:
               value: {{ .Values.additionalServerOptions }}
             - name: X509_CA_BUNDLE
               value: /var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt
+            # https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.4/html/getting_started_with_jboss_eap_for_openshift_container_platform/reference_information#configuring_dns_ping
             {{- if .Values.pingService.enabled }}
+            - name: JGROUPS_PING_PROTOCOL
+              value: dns.DNS_PING
             - name: OPENSHIFT_DNS_PING_SERVICE_NAME
               value: {{ include "sso-keycloak.fullname" . }}-ping
             - name: OPENSHIFT_DNS_PING_SERVICE_PORT
@@ -146,8 +149,6 @@ spec:
               value: db-postgresql=DB
             - name: TX_DATABASE_PREFIX_MAPPING
               value: db-postgresql=DB
-            - name: JGROUPS_PING_PROTOCOL
-              value: dns.DNS_PING
             - name: TZ
               value: America/Vancouver
           volumeMounts:

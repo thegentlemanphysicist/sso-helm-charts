@@ -25,10 +25,11 @@ credentials:
     password:
 
 # Additional users and databases; each user will have full privileges on the same name of the database
-# leave an empty string to generate the password automatically
+# leave the password empty to generate the password automatically
 # example
 # additionalCredentials:
-#   myapp: ""
+#   - username: myapp
+#     password:
 additionalCredentials: {}
 
 # set to allow clients to connect without SSL enabled.

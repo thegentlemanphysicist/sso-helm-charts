@@ -76,7 +76,8 @@ patroni:
   fullnameOverride: sso-patroni
 
   additionalCredentials:
-    ssokeycloak: ""
+    - username: ssokeycloak
+      password:
 
   persistentVolume:
     size: 10Gi
