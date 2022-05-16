@@ -62,7 +62,6 @@ tolerations: []
 affinity: {}
 
 patroni:
-  install: true
   replicaCount: 3
   # RH-SSO v7.5-9 is not tested with PostgreSQL 14
   image:
@@ -84,3 +83,6 @@ patroni:
 
   podDisruptionBudget:
     enabled: true
+
+tags:
+  patroni-enabled: true
