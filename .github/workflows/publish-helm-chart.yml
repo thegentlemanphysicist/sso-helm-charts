@@ -45,8 +45,8 @@ jobs:
 
       - name: Remove requirements of Keycloak Helm chart
         run: |
-          rm -rf charts
-          rm requirements.lock
+          rm -rf charts || true
+          rm requirements.lock || true
         working-directory: ./charts/keycloak
 
       - name: Run chart-releaser
