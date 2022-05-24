@@ -3,6 +3,19 @@ entries:
   patroni:
   - apiVersion: v1
     appVersion: 2.1-p5
+    created: "2022-05-24T19:54:38.509956583Z"
+    description: 'Highly available elephant herd: HA PostgreSQL cluster.'
+    digest: 33fa581d5a54c2379116fbec07e65fa656e55e115cd39791db965790ad4e9ff9
+    home: https://github.com/bcgov/sso-helm-charts/tree/main/charts/patroni
+    name: patroni
+    sources:
+    - https://github.com/zalando/patroni
+    - https://github.com/zalando/spilo
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/patroni-1.4.1/patroni-1.4.1.tgz
+    version: 1.4.1
+  - apiVersion: v1
+    appVersion: 2.1-p5
     created: "2022-05-24T19:06:20.17707847Z"
     description: 'Highly available elephant herd: HA PostgreSQL cluster.'
     digest: ab93843fc981265fb37df7fa0386a42db03b5d17e6b87cd3a80d3cab23f264fe
@@ -352,4 +365,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-24T19:17:59.521818339Z"
+generated: "2022-05-24T19:54:38.510251586Z"
