@@ -230,7 +230,10 @@ spec:
         {{- if .Values.persistentVolume.annotations }}
 {{ toYaml .Values.persistentVolume.annotations | indent 8 }}
         {{- end }}
-        labels: {{ include "patroni.labels" . | nindent 10 }}
+        # https://github.com/helm/helm/issues/7998
+        # Let's use more generic labels to make future updates flexible; otherwise it will hit an error like below:
+        # Error "Forbidden: updates to statefulset spec for fields other than 'replicas', 'template', and 'updateStrategy' are forbidden" for field "spec".
+        labels: {{ include "patroni.selectorLabels" . | nindent 10 }}
       spec:
         accessModes:
 {{ toYaml .Values.persistentVolume.accessModes | indent 8 }}
