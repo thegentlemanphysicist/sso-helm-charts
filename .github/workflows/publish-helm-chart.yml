@@ -43,6 +43,12 @@ jobs:
         with:
           cmd: yq -i 'del(.dependencies) | .version = .version + "-nodep"' ./charts/keycloak/Chart.yaml
 
+      - name: Remove requirements of Keycloak Helm chart
+        run: |
+          rm -rf charts
+          rm requirements.lock
+        working-directory: ./charts/keycloak
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.0
         with:
