@@ -161,7 +161,7 @@ spec:
               readOnly: true
             {{- end }}
             {{- if .Values.persistentLog.enabled }}
-            - mountPath: {{ .Values.persistentLog.path }}
+            - mountPath: {{ .Values.persistentLog.mountPath }}
               name: logs-volume
             {{- end }}
       volumes:

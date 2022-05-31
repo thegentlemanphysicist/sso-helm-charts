@@ -4,12 +4,14 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "sso-keycloak.fullname" . }}-logs
   labels: {{ include "sso-keycloak.labels" . | nindent 4 }}
-  annotations:
-    volume.beta.kubernetes.io/storage-class: {{ .Values.persistentLog.storageClassName }}
+  annotations: {{- toYaml .Values.persistentLog.annotations | nindent 4 }}
 spec:
   accessModes:
-    - ReadWriteMany
+    {{- range .Values.persistentLog.accessModes }}
+    - {{ . | quote }}
+    {{- end }}
+  storageClassName: {{ .Values.persistentLog.storageClass | quote }}
   resources:
     requests:
-      storage: 5Gi
+      storage: {{ .Values.persistentLog.size | quote }}
 {{- end }}

@@ -44,8 +44,12 @@ tls:
 
 persistentLog:
   enabled: true
-  storageClassName: netapp-file-standard
-  path: /var/log/eap
+  size: 5Gi
+  storageClass: netapp-file-standard
+  mountPath: /var/log/eap
+  annotations: {}
+  accessModes:
+    - ReadWriteMany
 
 resources:
   limits:
