@@ -141,6 +141,14 @@ spec:
         - name: BACKUP_NUM_TO_RETAIN
           value: {{ .Values.walG.retainBackups | quote}}
         {{- end }}
+        {{- if .Values.walG.backupThresholdMegabytes }}
+        - name: WALE_BACKUP_THRESHOLD_MEGABYTES
+          value: {{ .Values.walG.backupThresholdMegabytes | quote}}
+        {{- end }}
+        {{- if .Values.walG.backupThresholdPercentage }}
+        - name: WALE_BACKUP_THRESHOLD_PERCENTAGE
+          value: {{ .Values.walG.backupThresholdPercentage | quote}}
+        {{- end }}
         {{- if eq .Values.walG.storage "pvc"}}
         - name: WALG_FILE_PREFIX
           value: {{ .Values.walG.pvc.mountPath }}
