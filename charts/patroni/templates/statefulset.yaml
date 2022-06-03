@@ -123,39 +123,28 @@ spec:
         - name: STANDBY_PORT
           value: {{ .Values.standby.port | quote }}
         {{- end }}
-        {{- if .Values.walE.enable }}
-        - name: USE_WALE
-          value: {{ .Values.walE.enable | quote }}
-        {{- if .Values.walE.scheduleCronJob }}
-        - name: BACKUP_SCHEDULE
-          value: {{ .Values.walE.scheduleCronJob | quote}}
-        {{- end }}
-        {{- if .Values.walE.retainBackups }}
-        - name: BACKUP_NUM_TO_RETAIN
-          value: {{ .Values.walE.retainBackups | quote}}
-        {{- end }}
-        {{- if .Values.walE.s3Bucket }}
-        - name: WAL_S3_BUCKET
-          value: {{ .Values.walE.s3Bucket | quote }}
-        {{else if .Values.walE.gcsBucket }}
-        - name: WAL_GCS_BUCKET
-          value: {{ .Values.walE.gcsBucket | quote }}
-        {{- if .Values.walE.kubernetesSecret }}
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: "/etc/credentials/{{.Values.walE.kubernetesSecret}}.json"
-        {{- end }}
-        {{- end }}
-        {{- if .Values.walE.backupThresholdMegabytes }}
-        - name: WALE_BACKUP_THRESHOLD_MEGABYTES
-          value: {{ .Values.walE.backupThresholdMegabytes | quote }}
-        {{- end }}
-        {{- if .Values.walE.backupThresholdPercentage }}
-        - name: WALE_BACKUP_THRESHOLD_PERCENTAGE
-          value: {{ .Values.walE.backupThresholdPercentage | quote }}
-        {{- end }}
-        {{- else }}
+        # WAL-G storage configuration
         - name: USE_WALE
           value: ""
+        {{- if .Values.walG.enabled }}
+        - name: USE_WALG
+          value: 'true'
+        - name: USE_WALG_BACKUP
+          value: 'true'
+        - name: USE_WALG_RESTORE
+          value: 'true'
+        {{- if .Values.walG.scheduleCronJob }}
+        - name: BACKUP_SCHEDULE
+          value: {{ .Values.walG.scheduleCronJob | quote}}
+        {{- end }}
+        {{- if .Values.walG.retainBackups }}
+        - name: BACKUP_NUM_TO_RETAIN
+          value: {{ .Values.walG.retainBackups | quote}}
+        {{- end }}
+        {{- if eq .Values.walG.storage "pvc"}}
+        - name: WALG_FILE_PREFIX
+          value: {{ .Values.walG.pvc.mountPath }}
+        {{- end }}
         {{- end }}
         - name: PGROOT
           value: "{{ .Values.persistentVolume.mountPath }}/pgroot"
@@ -180,12 +169,9 @@ spec:
         - mountPath: /etc/patroni
           name: patroni-config
           readOnly: true
-        {{- if .Values.walE.enable }}
-        {{- if .Values.walE.kubernetesSecret }}
-        - name: {{ .Values.walE.kubernetesSecret }}
-          mountPath: /etc/credentials
-          readOnly: true
-        {{- end }}
+        {{- if and (.Values.walG.enabled) (eq .Values.walG.storage "pvc") }}
+        - mountPath: {{ .Values.walG.pvc.mountPath }}
+          name: backups-volume
         {{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
@@ -211,16 +197,14 @@ spec:
       - name: patroni-config
         secret:
           secretName: {{ template "patroni.fullname" . }}
-      {{- if .Values.walE.enable }}
-      {{- if .Values.walE.kubernetesSecret }}
-      - name: {{ .Values.walE.kubernetesSecret }}
-        secret:
-          secretName: {{ .Values.walE.kubernetesSecret }}
-      {{- end }}
-      {{- end }}
       {{- if not .Values.persistentVolume.enabled }}
       - name: storage-volume
         emptyDir: {}
+      {{- end }}
+      {{- if and (.Values.walG.enabled) (eq .Values.walG.storage "pvc") }}
+      - name: backups-volume
+        persistentVolumeClaim:
+          claimName: {{ template "patroni.fullname" . }}-backups
       {{- end }}
   {{- if .Values.persistentVolume.enabled }}
   volumeClaimTemplates:
