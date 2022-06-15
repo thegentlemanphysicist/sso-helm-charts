@@ -40,11 +40,26 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
-Common labels
+Keycloak Common labels
 */}}
 {{- define "sso-keycloak.labels" -}}
-helm.sh/chart: {{ include "sso-keycloak.chart" . }}
+{{ include "sso-keycloak.commonlabels" . }}
 {{ include "sso-keycloak.selectorLabels" . }}
+{{- end }}
+
+{{/*
+Maintenance Common labels
+*/}}
+{{- define "sso-keycloak.maintenanceLabels" -}}
+{{ include "sso-keycloak.commonlabels" . }}
+{{ include "sso-keycloak.maintenanceSelectorLabels" . }}
+{{- end }}
+
+{{/*
+Common labels
+*/}}
+{{- define "sso-keycloak.commonlabels" -}}
+helm.sh/chart: {{ include "sso-keycloak.chart" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -53,9 +68,17 @@ app.kubernetes.io/part-of: {{ include "sso-keycloak.project" . }}
 {{- end }}
 
 {{/*
-Selector labels
+Keycloak Selector labels
 */}}
 {{- define "sso-keycloak.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "sso-keycloak.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
+Maintenance Selector labels
+*/}}
+{{- define "sso-keycloak.maintenanceSelectorLabels" -}}
+app.kubernetes.io/name: {{ include "sso-keycloak.name" . }}-maintenance
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

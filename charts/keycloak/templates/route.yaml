@@ -16,4 +16,8 @@ spec:
     {{ end }}
   to:
     kind: Service
+    {{ if and .Values.maintenancePage.enabled .Values.maintenancePage.on }}
+    name: {{ include "sso-keycloak.fullname" . }}-maintenance
+    {{ else }}
     name: {{ include "sso-keycloak.fullname" . }}
+    {{ end }}
