@@ -23,7 +23,7 @@ pingService:
 
 maintenancePage:
   enabled: false
-  on: false
+  active: false
   replicaCount: 1
   image:
     repository: ghcr.io/bcgov/sso-maintenance

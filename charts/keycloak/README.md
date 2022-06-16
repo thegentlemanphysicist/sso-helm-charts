@@ -65,7 +65,7 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `tolerations`                      | toleration settings                              | `[]`                                                                                       |
 | `affinity`                         | affinity settings                                | `{}`                                                                                       |
 | `maintenancePage.enabled`          | deploy maintenance page app                      | `false`                                                                                    |
-| `maintenancePage.on`               | forward incoming traffic to maintenance page app | `false`                                                                                    |
+| `maintenancePage.active`           | forward incoming traffic to maintenance page app | `false`                                                                                    |
 | `maintenancePage.replicaCount`     | number of maintenance app pods to create         | `1`                                                                                        |
 | `maintenancePage.image.repository` | maintenance app container image repository       | `ghcr.io/bcgov/sso-maintenance`                                                            |
 | `maintenancePage.image.tag`        | maintenance app container image tag              | `dev`                                                                                      |
