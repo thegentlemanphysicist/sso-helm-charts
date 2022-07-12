@@ -1,5 +1,22 @@
 apiVersion: v1
 entries:
+  metabase:
+  - apiVersion: v2
+    appVersion: 0.41.4
+    created: "2022-07-12T00:19:18.146218191Z"
+    dependencies:
+    - name: patroni
+      repository: https://bcgov.github.io/sso-helm-charts
+      tags:
+      - patroni-enabled
+      version: 1.5.1
+    description: A Helm chart for Metabase
+    digest: 0166531d451f9e87b1f016ccdc13089812c9f4c4385301288ce2a9fd8ef855f7
+    name: metabase
+    type: application
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/metabase-0.1.0/metabase-0.1.0.tgz
+    version: 0.1.0
   patroni:
   - apiVersion: v1
     appVersion: 2.1-p5
@@ -493,4 +510,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-05T18:00:40.435131198Z"
+generated: "2022-07-12T00:19:18.146435493Z"
