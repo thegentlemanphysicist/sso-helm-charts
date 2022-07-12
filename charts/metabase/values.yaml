@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: gcr.io/ggl-cas-storage/metabase
+  repository: metabase/metabase
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: "v0.43.4"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -75,7 +75,7 @@ password:
   complexity: normal
   length: 6
 
-timeZone: UTC
+timeZone: America/Vancouver
 emojiLogging: true
 # javaOpts:
 # pluginsDirectory:
