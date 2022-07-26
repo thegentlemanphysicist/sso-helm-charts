@@ -61,4 +61,4 @@ users:
     role: ROLE_TEAM_READ
 ```
 
-see [Available Roles](https://developer.gov.bc.ca/OpenShift-User-Guide-to-Creating-and-Using-a-Sysdig-Team-for-Monitoring#available-roles) for more available roles.
+see [Available Roles](https://developer.gov.bc.ca/Set-up-a-team-in-Sysdig-Monitor) for more available roles.
