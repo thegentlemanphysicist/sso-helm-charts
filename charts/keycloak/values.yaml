@@ -74,6 +74,25 @@ resources:
     cpu: 1250m
     memory: 1Gi
 
+livenessProbeTemplate: |
+  httpGet:
+    path: /auth/realms/master/.well-known/openid-configuration
+    port: 8080
+  initialDelaySeconds: 300
+  periodSeconds: 20
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+readinessProbeTemplate: |
+  httpGet:
+    path: /auth/realms/master/.well-known/openid-configuration
+    port: 8080
+  initialDelaySeconds: 200
+  periodSeconds: 20
+  timeoutSeconds: 1
+  successThreshold: 1
+  failureThreshold: 5
+
 nodeSelector: {}
 
 tolerations: []

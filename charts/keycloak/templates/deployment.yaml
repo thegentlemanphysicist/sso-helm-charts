@@ -39,46 +39,12 @@ spec:
                   cp "$base_config" "$target_config"
               fi;
               /opt/eap/bin/openshift-launch.sh;
-          # see https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html/getting_started_with_jboss_eap_for_openshift_container_platform/migration-applications-72-73_default
-          # ideally, it should work with the configurations below, yet as it takes too long to be ready, let's replace it with `tcpSocket` options.
-          # livenessProbe:
-          #   exec:
-          #     command:
-          #     - /bin/bash
-          #     - -c
-          #     - timeout 60 /opt/eap/bin/livenessProbe.sh
-          #   initialDelaySeconds: 300
-          #   periodSeconds: 20
-          #   successThreshold: 1
-          #   failureThreshold: 5
-          # readinessProbe:
-          #   exec:
-          #     command:
-          #     - /bin/bash
-          #     - -c
-          #     - timeout 60 /opt/eap/bin/readinessProbe.sh
-          #   initialDelaySeconds: 200
-          #   periodSeconds: 20
-          #   successThreshold: 1
-          #   failureThreshold: 5
-          livenessProbe:
-            httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
-              port: 8080
-            initialDelaySeconds: 300
-            periodSeconds: 20
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
-          readinessProbe:
-            httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
-              port: 8080
-            initialDelaySeconds: 200
-            periodSeconds: 20
-            timeoutSeconds: 1
-            successThreshold: 1
-            failureThreshold: 5
+          {{- if .Values.livenessProbeTemplate }}
+          livenessProbe: {{ tpl .Values.livenessProbeTemplate . | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbeTemplate }}
+          readinessProbe: {{ tpl .Values.readinessProbeTemplate . | nindent 12 }}
+          {{- end }}
           ports:
             - containerPort: 8778
               name: jolokia

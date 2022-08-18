@@ -92,5 +92,34 @@ The following table lists the configurable parameters of the Keycloak chart and 
   $ helm upgrade <release-name> sso-keycloak/sso-keycloak [--namespace <my-namespace>] [--version <x.y.z>] [--values ./custom-values.yaml] --set-file configuration.data=<xml-file-path>
   ```
 
+- Consider updating `Liveness and Readiness Probe` Configurations to run JBoss EAP scripts
+
+  ```yaml
+  livenessProbeTemplate: |
+    exec:
+      command:
+      - /bin/bash
+      - -c
+      - timeout 60 /opt/eap/bin/livenessProbe.sh
+    initialDelaySeconds: 120
+    periodSeconds: 20
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbeTemplate: |
+    exec:
+      command:
+      - /bin/bash
+      - -c
+      - timeout 60 /opt/eap/bin/readinessProbe.sh
+    initialDelaySeconds: 120
+    periodSeconds: 32
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+  ```
+
+  - see https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.2/html/getting_started_with_jboss_eap_for_openshift_online/migrating-application-openshift-4
+
 - k8s resource object label conventions
   1. see https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/#labels
