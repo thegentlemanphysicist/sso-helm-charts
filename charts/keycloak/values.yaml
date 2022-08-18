@@ -11,7 +11,7 @@ fullnameOverride: sso-keycloak
 
 configuration:
   enabled: false
-  version: '7.6'
+  version: "7.6"
   data:
 
 networkPolicies:
@@ -35,6 +35,10 @@ maintenancePage:
     tag: dev
     pullPolicy: Always
   resources: {}
+
+admin:
+  username:
+  password:
 
 postgres:
   host: sso-patroni
