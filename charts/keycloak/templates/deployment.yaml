@@ -1,3 +1,5 @@
+{{- $configDir := "/opt/eap/standalone/configuration" -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,6 +17,10 @@ spec:
     matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- if .Values.configuration.enabled }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
+      {{- end }}
       labels: {{ include "sso-keycloak.labels" . | nindent 8 }}
     spec:
       containers:
@@ -23,9 +29,16 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
-          command:
-            - /bin/sh
-            - /opt/eap/bin/openshift-launch.sh
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              base_config={{ $configDir }}-provisioning/standalone-openshift.xml
+              target_config={{ $configDir }}/standalone-openshift.xml
+              if [[ -f "$base_config" ]]; then
+                  rm "$target_config"
+                  cp "$base_config" "$target_config"
+              fi;
+              /opt/eap/bin/openshift-launch.sh;
           # see https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.3/html/getting_started_with_jboss_eap_for_openshift_container_platform/migration-applications-72-73_default
           # ideally, it should work with the configurations below, yet as it takes too long to be ready, let's replace it with `tcpSocket` options.
           # livenessProbe:
@@ -164,6 +177,11 @@ spec:
             - mountPath: {{ .Values.persistentLog.mountPath }}
               name: logs-volume
             {{- end }}
+            {{- if .Values.configuration.enabled }}
+            - name: config-volume
+              mountPath: {{ $configDir }}-provisioning
+              readOnly: true
+            {{- end }}
       volumes:
         {{- if .Values.tls.enabled }}
         - name: sso-x509-https-volume
@@ -179,6 +197,15 @@ spec:
         - name: logs-volume
           persistentVolumeClaim:
             claimName: {{ include "sso-keycloak.fullname" . }}-logs
+        {{- end }}
+        {{- if .Values.configuration.enabled }}
+        - name: config-volume
+          configMap:
+            name: {{ include "sso-keycloak.fullname" . }}-sso-config
+            defaultMode: 420
+            items:
+              - key: standalone-openshift.xml
+                path: standalone-openshift.xml
         {{- end }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
