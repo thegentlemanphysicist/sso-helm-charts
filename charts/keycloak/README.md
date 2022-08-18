@@ -64,6 +64,7 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `nodeSelector`                     | node labels for pod assignment                                                    | `{}`                                                                                       |
 | `tolerations`                      | toleration settings                                                               | `[]`                                                                                       |
 | `affinity`                         | affinity settings                                                                 | `{}`                                                                                       |
+| `affinityTemplate`                 | a template string to use to generate the affinity settings                        |                                                                                            |
 | `maintenancePage.enabled`          | deploy maintenance page app                                                       | `false`                                                                                    |
 | `maintenancePage.active`           | forward incoming traffic to maintenance page app                                  | `false`                                                                                    |
 | `maintenancePage.replicaCount`     | number of maintenance app pods to create                                          | `1`                                                                                        |
@@ -72,7 +73,9 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `maintenancePage.image.pullPolicy` | maintenance app container image pull policy                                       | `Always`                                                                                   |
 | `configuration.enabled`            | create a ConfigMap for SSO configuration                                          | `false`                                                                                    |
 | `configuration.version`            | the version of the default configuration; used when `configuration.data` is empty | `7.6`                                                                                      |
-| `configuration.data`               | the user-defined configuration value                                              | `""`                                                                                       |
+| `configuration.data`               | the user-defined configuration value                                              |                                                                                            |
+| `livenessProbeTemplate`            | a template string to use to generate the livenessProbe                            |                                                                                            |
+| `readinessProbeTemplate`           | a template string to use to generate the readinessProbe                           |                                                                                            |
 
 ### Notes
 

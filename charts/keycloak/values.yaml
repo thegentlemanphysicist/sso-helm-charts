@@ -83,6 +83,7 @@ livenessProbeTemplate: |
   timeoutSeconds: 1
   successThreshold: 1
   failureThreshold: 5
+
 readinessProbeTemplate: |
   httpGet:
     path: /auth/realms/master/.well-known/openid-configuration
@@ -98,6 +99,16 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+affinityTemplate: |
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        topologyKey: "kubernetes.io/hostname"
+        labelSelector:
+          matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 10 }}
 
 patroni:
   replicaCount: 3

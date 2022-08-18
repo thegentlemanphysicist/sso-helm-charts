@@ -148,6 +148,11 @@ spec:
               mountPath: {{ $configDir }}-provisioning
               readOnly: true
             {{- end }}
+      {{- if .Values.affinity }}
+      affinity: {{ .Values.affinity | toYaml | nindent 8 }}
+      {{- else if .Values.affinityTemplate }}
+      affinity: {{ tpl .Values.affinityTemplate . | nindent 8 }}
+      {{- end }}
       volumes:
         {{- if .Values.tls.enabled }}
         - name: sso-x509-https-volume
