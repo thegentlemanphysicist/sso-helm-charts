@@ -7,11 +7,11 @@ metadata:
   labels: {{ include "sso-keycloak.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  {{- if .Values.rollingUpdate }}
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: "25%" # how many pod we can add at a time
-      maxUnavailable: 0 # how many pod can be unavailable
+    rollingUpdate: {{ .Values.rollingUpdate | toYaml | nindent 6 }}
+  {{- end }}
   minReadySeconds: 30 # The minimum number of seconds for which a newly created Pod should be ready
   selector:
     matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 6 }}
@@ -39,11 +39,11 @@ spec:
                   cp "$base_config" "$target_config"
               fi;
               /opt/eap/bin/openshift-launch.sh;
-          {{- if .Values.livenessProbeTemplate }}
-          livenessProbe: {{ tpl .Values.livenessProbeTemplate . | nindent 12 }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.readinessProbeTemplate }}
-          readinessProbe: {{ tpl .Values.readinessProbeTemplate . | nindent 12 }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
           {{- end }}
           ports:
             - containerPort: 8778
