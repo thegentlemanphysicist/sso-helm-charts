@@ -78,6 +78,8 @@ resources:
     cpu: 1250m
     memory: 1Gi
 
+rollingUpdate: {}
+
 livenessProbeTemplate: |
   httpGet:
     path: /auth/realms/master/.well-known/openid-configuration
