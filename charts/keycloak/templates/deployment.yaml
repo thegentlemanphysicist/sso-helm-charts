@@ -39,11 +39,11 @@ spec:
                   cp "$base_config" "$target_config"
               fi;
               /opt/eap/bin/openshift-launch.sh;
-          {{- if .Values.livenessProbeTemplate }}
-          livenessProbe: {{ tpl .Values.livenessProbeTemplate . | nindent 12 }}
+          {{- if .Values.livenessProbe }}
+          livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.readinessProbeTemplate }}
-          readinessProbe: {{ tpl .Values.readinessProbeTemplate . | nindent 12 }}
+          {{- if .Values.readinessProbe }}
+          readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
           {{- end }}
           ports:
             - containerPort: 8778

@@ -76,8 +76,8 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `configuration.enabled`            | create a ConfigMap for SSO configuration                                          | `false`                                                                                    |
 | `configuration.version`            | the version of the default configuration; used when `configuration.data` is empty | `7.6`                                                                                      |
 | `configuration.data`               | the user-defined configuration value                                              |                                                                                            |
-| `livenessProbeTemplate`            | a template string to use to generate the livenessProbe                            |                                                                                            |
-| `readinessProbeTemplate`           | a template string to use to generate the readinessProbe                           |                                                                                            |
+| `livenessProbe`                    | livenessProbe settings                                                            |
+| `readinessProbe`                   | readinessProbe settings                                                           |                                                                                            |
 | `rollingUpdate`                    | rolling update process settings                                                   | `{}`                                                                                       |     |     |
 
 ### Notes
