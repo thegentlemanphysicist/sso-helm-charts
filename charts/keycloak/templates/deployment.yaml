@@ -39,11 +39,36 @@ spec:
                   cp "$base_config" "$target_config"
               fi;
               /opt/eap/bin/openshift-launch.sh;
-          {{- if .Values.livenessProbe }}
-          livenessProbe: {{ .Values.livenessProbe | toYaml | nindent 12 }}
+          {{- if .Values.livenessProbe.enabled }}
+          livenessProbe:
+          {{- if eq .Values.livenessProbe.verification "script"}}
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - timeout 60 /opt/eap/bin/livenessProbe.sh
+          {{- else }}
+            httpGet:
+              path: /auth/realms/master/.well-known/openid-configuration
+              port: 8080
+          {{- end -}}
+          {{ (omit .Values.livenessProbe "enabled" "verification") | toYaml | nindent 12 }}
           {{- end }}
-          {{- if .Values.readinessProbe }}
-          readinessProbe: {{ .Values.readinessProbe | toYaml | nindent 12 }}
+
+          {{- if .Values.readinessProbe.enabled }}
+          readinessProbe:
+          {{- if eq .Values.readinessProbe.verification "script"}}
+            exec:
+              command:
+              - /bin/bash
+              - -c
+              - timeout 60 /opt/eap/bin/readinessProbe.sh
+          {{- else }}
+            httpGet:
+              path: /auth/realms/master/.well-known/openid-configuration
+              port: 8080
+          {{- end -}}
+          {{ (omit .Values.readinessProbe "enabled" "verification") | toYaml | nindent 12 }}
           {{- end }}
           ports:
             - containerPort: 8778

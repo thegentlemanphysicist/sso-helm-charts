@@ -75,26 +75,24 @@ resources:
     cpu: 2
     memory: 2Gi
   requests:
-    cpu: 1250m
+    cpu: 200m
     memory: 1Gi
 
 rollingUpdate: {}
 
 livenessProbe:
-  httpGet:
-    path: /auth/realms/master/.well-known/openid-configuration
-    port: 8080
-  initialDelaySeconds: 300
+  enabled: true
+  verification: script
+  initialDelaySeconds: 240
   periodSeconds: 20
   timeoutSeconds: 5
   successThreshold: 1
   failureThreshold: 6
 
 readinessProbe:
-  httpGet:
-    path: /auth/realms/master/.well-known/openid-configuration
-    port: 8080
-  initialDelaySeconds: 200
+  enabled: true
+  verification: script
+  initialDelaySeconds: 180
   periodSeconds: 20
   timeoutSeconds: 5
   successThreshold: 1
