@@ -60,7 +60,7 @@ The following table lists the configurable parameters of the patroni chart and t
 | `image.repository`               | The image to pull                                                                                                              | `registry.opensource.zalan.do/acid/spilo-10`        |
 | `image.tag`                      | The version of the image to pull                                                                                               | `1.5-p5`                                            |
 | `image.pullPolicy`               | The pull policy                                                                                                                | `IfNotPresent`                                      |
-| `imagePullSecrets`          | A list of imagePullSecrets    | `[]]`     |
+| `imagePullSecrets`               | A list of imagePullSecrets    | `[]`     |
 | `imagePullSecrets.name`          | The imagePullSecret    | `nil`     |
 | `credentials.existingSecret`     | Using existing credentials secret                                                                                              | `nil`                                               |
 | `credentials.superuser.username` | Username of the superuser                                                                                                      | `postgres`                                          |
