@@ -6,6 +6,7 @@ image:
   pullPolicy: Always
   tag: 2.1-p5
 
+imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
