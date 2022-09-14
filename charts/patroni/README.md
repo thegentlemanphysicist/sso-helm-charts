@@ -61,7 +61,6 @@ The following table lists the configurable parameters of the patroni chart and t
 | `image.tag`                      | The version of the image to pull                                                                                               | `1.5-p5`                                            |
 | `image.pullPolicy`               | The pull policy                                                                                                                | `IfNotPresent`                                      |
 | `imagePullSecrets`               | A list of imagePullSecrets    | `[]`     |
-| `imagePullSecrets.name`          | The imagePullSecret    | `nil`     |
 | `credentials.existingSecret`     | Using existing credentials secret                                                                                              | `nil`                                               |
 | `credentials.superuser.username` | Username of the superuser                                                                                                      | `postgres`                                          |
 | `credentials.superuser.password` | Password of the superuser                                                                                                      | `tea`                                               |
