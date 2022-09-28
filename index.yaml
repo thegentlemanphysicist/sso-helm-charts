@@ -260,6 +260,16 @@ entries:
     version: 0.17.8
   sso-keycloak:
   - apiVersion: v1
+    appVersion: 7.6.5-build.8
+    created: "2022-09-28T17:42:43.82119388Z"
+    description: Open Source Identity and Access Management For Modern Applications
+      and Services
+    digest: 96affd982030352ada22eafcbe39ca5f126120709148a0a50f629ded698e79f1
+    name: sso-keycloak
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.1/sso-keycloak-1.14.1.tgz
+    version: 1.14.1
+  - apiVersion: v1
     appVersion: 7.6.2-build.2
     created: "2022-08-24T03:42:05.766282996Z"
     description: Open Source Identity and Access Management For Modern Applications
@@ -271,20 +281,20 @@ entries:
     version: 1.14.0
   - apiVersion: v1
     appVersion: 7.6.2-build.2
-    created: "2022-08-24T03:42:09.390852939Z"
+    created: "2022-09-14T21:14:56.695584468Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: 2c1341f0c5dca192adc04d2b1de05147513088360c7a80c72d8d7988d89b6f2c
+    digest: 43755f497f107c17a4c3001b8c89c62a0710de6f6228ce58561972435caba8e7
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.0-nodep/sso-keycloak-1.14.0-nodep.tgz
     version: 1.14.0-nodep
   - apiVersion: v1
     appVersion: 7.6.2-build.2
-    created: "2022-09-14T21:14:56.695584468Z"
+    created: "2022-08-24T03:42:09.390852939Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: 43755f497f107c17a4c3001b8c89c62a0710de6f6228ce58561972435caba8e7
+    digest: 2c1341f0c5dca192adc04d2b1de05147513088360c7a80c72d8d7988d89b6f2c
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.0-nodep/sso-keycloak-1.14.0-nodep.tgz
@@ -630,4 +640,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-14T21:14:56.696060176Z"
+generated: "2022-09-28T17:42:43.821741478Z"
