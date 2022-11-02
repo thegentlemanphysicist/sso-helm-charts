@@ -81,6 +81,7 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `readinessProbe.enabled`           | enable readinessProbe settings                                   | `true`                                                                                     |
 | `readinessProbe.verification`      | readinessProbe option; `script \| http`                          | `script`                                                                                   |
 | `rollingUpdate`                    | rolling update process settings                                  | `{}`                                                                                       |
+| `annotations.timeout`                | route timeout                                  | null
 
 ### Notes
 
