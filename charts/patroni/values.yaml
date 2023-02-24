@@ -165,3 +165,8 @@ transportServerClaim:
   enabled: false
   interval: 10
   timeout: 10
+
+transportServerClaimConfig:
+  enabled: false
+  interval: 10
+  timeout: 10
