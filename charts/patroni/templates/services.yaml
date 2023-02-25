@@ -27,3 +27,18 @@ spec:
     protocol: TCP
   selector: {{ include "patroni.selectorLabels" . | nindent 4 }}
     {{ .Values.kubernetes.roleLabel }}: replica
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "patroni.fullname" . }}-config-readonly
+  labels: {{ include "patroni.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+  - name: patroni
+    port: 8008
+    targetPort: 8008
+    protocol: TCP
+  selector: {{ include "patroni.selectorLabels" . | nindent 4 }}
+    {{ .Values.kubernetes.roleLabel }}: replica
