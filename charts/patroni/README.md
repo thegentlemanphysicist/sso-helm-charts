@@ -1,6 +1,6 @@
 # Patroni Helm Chart
 
-This directory contains a Kubernetes chart to deploy a [Patroni](https://github.com/zalando/patroni/) cluster using a [Spilo](https://github.com/zalando/spilo) and a StatefulSet.
+This directory contains a Kubernetes chart to deploy a [Patroni](https://github.com/zalando/patroni/) cluster using a [Spilo](https://github.com/zalando/spilo) and a StatefulSet. Which deploys on pr merges.
 
 ## Prerequisites Details
 
