@@ -11,17 +11,3 @@ spec:
   service: {{ template "patroni.fullname" . }}
   servicePort: 5432
 {{- end }}
----
-{{- if .Values.transportServerClaimConfig.enabled }}
-apiVersion: porter.devops.gov.bc.ca/v1alpha1
-kind: TransportServerClaim
-metadata:
-  name: {{ template "patroni.fullname" . }}-config-transport-server
-spec:
-  monitor:
-    interval: {{ .Values.transportServerClaimConfig.interval }}
-    timeout: {{ .Values.transportServerClaimConfig.timeout }}
-    type: tcp
-  service: {{ template "patroni.fullname" . }}-config-readonly
-  servicePort: 8008
-{{- end }}
