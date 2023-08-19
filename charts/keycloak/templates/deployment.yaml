@@ -172,6 +172,8 @@ spec:
             - name: config-volume
               mountPath: {{ $configDir }}-provisioning
               readOnly: true
+            - name: {{ include "sso-keycloak.fullname" . }}-probe-netrc-volume
+              mountPath: /mnt/rh-sso
             {{- end }}
       {{- if .Values.affinity }}
       affinity: {{ .Values.affinity | toYaml | nindent 8 }}
@@ -203,6 +205,9 @@ spec:
               - key: standalone-openshift.xml
                 path: standalone-openshift.xml
         {{- end }}
+        - name: {{ include "sso-keycloak.fullname" . }}-probe-netrc-volume
+          emptyDir:
+            medium: Memory
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
