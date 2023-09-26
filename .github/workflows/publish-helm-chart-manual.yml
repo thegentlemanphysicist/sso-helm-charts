@@ -8,7 +8,7 @@ on:
         type: choice
         required: true
         options: ["keycloak", "metabase", "patroni", "sysdig"]
-        default: "keycloak"
+        default: "sysdig"
 
 jobs:
   build-and-push-helm:
@@ -40,24 +40,3 @@ jobs:
           charts_dir: charts/${{ github.event.inputs.chart }}
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Remove dependencies of Keycloak Helm chart
-        if: ${{ github.event.inputs.chart }} == "keycloak"
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq -i 'del(.dependencies) | .version = .version + "-nodep"' ./charts/keycloak/Chart.yaml
-
-      - name: Remove requirements of Keycloak Helm chart
-        if: ${{ github.event.inputs.chart }} == "keycloak"
-        run: |
-          rm -rf charts || true
-          rm requirements.lock || true
-        working-directory: ./charts/keycloak
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.0
-        with:
-          charts_dir: charts/${{ github.event.inputs.chart }}
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          CR_SKIP_EXISTING: true
