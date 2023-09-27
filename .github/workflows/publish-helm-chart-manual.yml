@@ -1,9 +1,9 @@
-name: Manually Publish Helm Chart
+name: Publish Helm Charts
 
 on:
   workflow_dispatch:
-  inputs:
-    chart:
+    inputs:
+      chart:
         description: "The helm chart to publish"
         type: choice
         required: true
