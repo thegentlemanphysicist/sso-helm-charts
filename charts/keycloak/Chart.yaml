@@ -6,6 +6,6 @@ description: Open Source Identity and Access Management For Modern Applications 
 dependencies:
   - name: patroni
     version: 1.5.2
-    repository: https://bcgov.github.io/sso-helm-charts
+    repository: https://thegentlemanphysicist.github.io/sso-helm-charts
     tags:
       - patroni-enabled
