@@ -30,7 +30,7 @@ jobs:
       - name: Run chart-releaser for patroni only
         uses: helm/chart-releaser-action@v1.4.0
         with:
-          charts_dir: charts/dependencies
+          charts_dir: charts/dependencies 
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: true
