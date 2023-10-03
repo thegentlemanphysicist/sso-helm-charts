@@ -16,7 +16,7 @@ postgresMajorVersion: 14
 credentials:
   existingSecret: false
   superuser:
-    username: postgres
+    username: postgrestwo
     password:
   admin:
     username: admin
