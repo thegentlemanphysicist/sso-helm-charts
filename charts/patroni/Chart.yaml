@@ -1,8 +1,8 @@
 apiVersion: v1
 name: patroni
 description: "Highly available: HA PostgreSQL cluster."
-version: 5.5.2
-appVersion: 3.1-p5
+version: 5.5.3
+appVersion: 3.2-p5
 home: https://github.com/bcgov/sso-helm-charts/tree/main/charts/patroni
 sources:
   - https://github.com/zalando/patroni
