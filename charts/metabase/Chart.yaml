@@ -7,6 +7,6 @@ appVersion: "0.43.4"
 dependencies:
   - name: patroni
     version: 1.5.1
-    repository: https://bcgov.github.io/sso-helm-charts
+    repository: https://thegentlemanphysicist.github.io/sso-helm-charts
     tags:
       - patroni-enabled

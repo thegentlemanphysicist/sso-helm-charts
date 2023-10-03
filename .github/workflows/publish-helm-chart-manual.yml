@@ -32,7 +32,7 @@ jobs:
       - name: Add Helm Dependencies
         if: ${{ github.event.inputs.chart }} == "keycloak" || ${{ github.event.inputs.chart }} == "metabase"
         run: |
-          helm repo add patroni https://bcgov.github.io/sso-helm-charts
+          helm repo add patroni https://thegentlemanphysicist.github.io/sso-helm-charts
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.0

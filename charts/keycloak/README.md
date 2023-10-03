@@ -7,7 +7,7 @@ The `SSO Keycloak Helm Chart` provides a easy way to deploy (RedHat SSO)[https:/
 ### Add this chart repository
 
 ```console
-$ helm repo add sso-keycloak https://bcgov.github.io/sso-keycloak
+$ helm repo add sso-keycloak https://thegentlemanphysicist.github.io/sso-keycloak
 ```
 
 ### Install this chart repository
