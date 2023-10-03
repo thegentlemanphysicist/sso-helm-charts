@@ -27,6 +27,14 @@ jobs:
         with:
           version: v3.8.2
 
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.4.0
+        with:
+          charts_dir: charts/patroni
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: true
+
       - name: Add Helm Dependencies
         run: |
           helm repo add patroni https://thegentlemanphysicist.github.io/sso-helm-charts
