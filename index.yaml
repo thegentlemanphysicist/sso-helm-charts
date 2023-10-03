@@ -820,6 +820,16 @@ entries:
   sysdig:
   - apiVersion: v2
     appVersion: v1alpha1
+    created: "2023-10-03T20:23:32.58690352Z"
+    description: A Helm chart for Kubernetes to deploy Sysdig resources
+    digest: 29a69dc7875ba2bd47324f35372afb3b706f4eebe237a5e9d3dea5a44b4468da
+    name: sysdig
+    type: application
+    urls:
+    - https://github.com/thegentlemanphysicist/sso-helm-charts/releases/download/sysdig-2.1.0/sysdig-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
+    appVersion: v1alpha1
     created: "2022-05-05T23:53:29.337516684Z"
     description: A Helm chart for Kubernetes to deploy Sysdig resources
     digest: b6b5d51188aa2741f73a34eddf6cb28704177465d0cb91ce049cfbc98e079748
@@ -828,4 +838,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2023-08-19T00:08:51.035862547Z"
+generated: "2023-10-03T20:23:32.588271514Z"
