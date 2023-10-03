@@ -27,7 +27,7 @@ jobs:
         with:
           version: v3.8.2
 
-      - name: Run chart-releaser
+      - name: Run chart-releaser for patroni only
         uses: helm/chart-releaser-action@v1.4.0
         with:
           charts_dir: charts/patroni
